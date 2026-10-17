@@ -1,0 +1,45 @@
+name: Aggiorna usage
+
+on:
+  schedule:
+    # 18:17 UTC dal 1° al 5° giorno di ogni mese.
+    # Smogon pubblica di solito il 1° del mese nel pomeriggio; se i dati non ci sono
+    # ancora lo script non fa nulla e riprova il giorno dopo.
+    - cron: "17 18 1-5 * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rigenera anche se il mese è già pubblicato"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-usage
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v5
+
+      - name: Genera i dati
+        run: python3 scripts/build_usage.py ${{ inputs.force && '--force' || '' }}
+
+      - name: Pubblica i dati nel repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "Nessun dato nuovo da pubblicare."
+          else
+            month=$(python3 -c "import json; print(json.load(open('docs/latest.json'))['month'])")
+            git commit -m "Usage ${month}"
+            git push
+          fi
