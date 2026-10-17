@@ -1,0 +1,32 @@
+{
+  "min_battles": 5000,
+  "defaults": {
+    "rating": 1760,
+    "min_usage_pct": 0.25,
+    "min_entry_pct": 0.5,
+    "top": {
+      "abilities": 5,
+      "items": 10,
+      "moves": 15,
+      "spreads": 10,
+      "teammates": 15
+    }
+  },
+  "datasets": {
+    "doubles_bo3": {
+      "enabled": true,
+      "pattern": "gen9championsvgc(?P<year>\\d{4})reg(?P<reg>[a-z]{2})bo3",
+      "override": null
+    },
+    "doubles_bo1": {
+      "enabled": false,
+      "pattern": "gen9championsvgc(?P<year>\\d{4})reg(?P<reg>[a-z]{2})",
+      "override": null
+    },
+    "singles": {
+      "enabled": false,
+      "pattern": "gen9championsbssreg(?P<reg>[a-z]{2})",
+      "override": null
+    }
+  }
+}
