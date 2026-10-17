@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "month": "2026-09",
+  "generated_at": "2026-10-17T23:04:39+00:00",
+  "mapping": "2026-10-17T22:44:06+00:00",
+  "source": {
+    "name": "Smogon / Pokémon Showdown",
+    "url": "https://www.smogon.com/stats/",
+    "note": "Statistiche mensili del ladder di Pokémon Showdown (simulatore), non del ranked in-game."
+  },
+  "datasets": {
+    "doubles_bo3": {
+      "format": "gen9championsvgc2026regmcbo3",
+      "regulation": "M-C",
+      "rating": 1760,
+      "battles": 223477,
+      "pokemon_count": 84,
+      "url": "data/doubles_bo3/2026-09.json",
+      "history": [
+        "2026-09"
+      ]
+    }
+  }
+}
